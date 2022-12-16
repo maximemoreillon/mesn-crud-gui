@@ -8,6 +8,9 @@
                 <Textfield bind:value={newMovie.title} label="Title" />
             </p>
             <p>
+                <Textfield type="number" bind:value={newMovie.year} label="Year" />
+            </p>
+            <p>
                 <Button type="submit">
                     <Icon class="material-icons">add</Icon>
                     <Label>Create movie</Label>
@@ -26,6 +29,7 @@ import type Movie from 'src/types/movie'
 
 const newMovie: Movie = {
     title: '',
+    year: new Date().getFullYear(),
 }
 
 const createMovie = async () => {

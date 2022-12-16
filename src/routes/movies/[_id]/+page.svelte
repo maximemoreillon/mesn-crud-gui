@@ -4,6 +4,9 @@
         <h2 class="mdc-typography--headline6">
             {movie.title}
         </h2>
+        <h3 class="mdc-typography--subtitle2">
+            {movie.year}
+        </h3>
         <p>
             <Button type="submit" on:click={deleteMovie}>
                 <Icon class="material-icons">delete</Icon>

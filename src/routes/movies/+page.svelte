@@ -10,11 +10,15 @@
         <table>
             <tr>
                 <th>Title</th>
+                <th>Year</th>
             </tr>
             {#each movies as movie}
             <tr>
                 <td>
                     <a href={`/movies/${movie._id}`}>{movie.title}</a>
+                </td>
+                <td>
+                    {movie.year}
                 </td>
             </tr>
             {/each}
