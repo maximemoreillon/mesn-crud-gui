@@ -1,18 +1,16 @@
 <Card padded>
       <Content>
         <h2 class="mdc-typography--headline6">
-          Home
+            About
         </h2>
         <p>
-            This is an example Svelte application performing CRUD operations in a MongoDB database. 
-        </p>
-        <p>
-          <a href="/movies">Movies</a>
+            This is an about page
         </p>
       </Content>
 </Card>
 
 <script lang="ts">
 import Card, { Content } from '@smui/card';
+
 
 </script>

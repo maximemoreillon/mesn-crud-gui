@@ -4,8 +4,8 @@
       <Title>MESN CRUD</Title>
     </Section>
     <Section align="end" toolbar>
-        <IconButton class="material-icons" aria-label="Bookmark this page">
-            bookmark
+        <IconButton class="material-icons">
+            information
         </IconButton>
     </Section>
   </Row>
