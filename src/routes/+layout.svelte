@@ -10,9 +10,10 @@
     </Section>
   </Row>
 </TopAppBar>
-<AutoAdjust {topAppBar}>
+<AutoAdjust {topAppBar} style="padding: 5em 1em; ">
   <slot></slot>
 </AutoAdjust>
+
 
 <script lang="ts">
     
@@ -26,4 +27,3 @@ import IconButton from '@smui/icon-button';
 
 let topAppBar: TopAppBar;
 </script>
-
