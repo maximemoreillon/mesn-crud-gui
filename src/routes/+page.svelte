@@ -1,28 +1,18 @@
-<TopAppBar bind:this={topAppBar} variant="standard">
-  <Row>
-    <Section>
-      <Title>MESN CRUD</Title>
-    </Section>
-    <Section align="end" toolbar>
-      <IconButton class="material-icons" aria-label="Bookmark this page"
-        >bookmark</IconButton
-      >
-    </Section>
-  </Row>
-</TopAppBar>
-<AutoAdjust {topAppBar}>
-  Hello
-</AutoAdjust>
+<Card padded>
+      <Content>
+        <h2 class="mdc-typography--headline6" style="margin: 0;">
+          Home
+        </h2>
+        <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
+          A simple Home page
+        </h3>
+        <p>
+            This is an example Svelte application performing CRUD operations in a MongoDB database. 
+        </p>
+      </Content>
+</Card>
 
 <script lang="ts">
-import TopAppBar, {
-Row,
-Section,
-Title,
-AutoAdjust,
-} from '@smui/top-app-bar';
-import IconButton from '@smui/icon-button';
-
-let topAppBar: TopAppBar;
+  import Card, { Content } from '@smui/card';
+ 
 </script>
-
