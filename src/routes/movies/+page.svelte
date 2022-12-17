@@ -24,7 +24,7 @@
                             <Cell>{movie.year}</Cell>
                             {#if movie.director}
                             <Cell>
-                                {movie.director.name}
+                                <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
                             </Cell>
                             {:else}
                             <Cell>
@@ -47,7 +47,7 @@ import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 import Card, { Content, Actions, } from '@smui/card'
 import { onMount } from 'svelte'
 
-import NewMovieDialog from '$lib/NewMovieDialog.svelte';
+import NewMovieDialog from '$lib/movies/NewMovieDialog.svelte';
 
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 

@@ -16,29 +16,11 @@
             <Textfield bind:value={person.name} label="Name" />
         </div>
 
-        {#if directedMovies}
-            <h3>Directed</h3>
-            <List>
-                {#each directedMovies as movie}
-                <Item href="/movies">
-                    <Text>{movie.title}</Text>
-                </Item>
-                {/each}
-            </List>
-        {/if}
+        <h3>Directed</h3>
+        <RelatedMovies query="director"/>
 
-        {#if moviesStarredin}
-            <h3>Starred in</h3>
-            <List>
-                {#each moviesStarredin as movie}
-                <Item href="/movies">
-                    <Text>{movie.title}</Text>
-                </Item>
-                {/each}
-            </List>
-        {/if}
-        
-
+        <h3>Starred in</h3>
+        <RelatedMovies query="actors"/>
 
         <Actions>
             <ActionButtons>
@@ -68,10 +50,10 @@ import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import Textfield from '@smui/textfield';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
-import List, { Item, Text } from '@smui/list';
 
 import type Person from 'src/types/person';
-import type Movie from 'src/types/movie';
+
+import RelatedMovies from '$lib/persons/[_id]/RelatedMovies.svelte';
 
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
@@ -80,15 +62,11 @@ import { goto } from '$app/navigation';
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let person: Person
-let directedMovies: Movie[]
-let moviesStarredin: Movie[]
 
 let loading = false
 
 onMount( async () => {
     await getPerson()
-    getDirectedMovies()
-    getMoviesStarredIn()
 })
 
 const {_id} = $page.params
@@ -108,30 +86,7 @@ const getPerson = async () => {
     }
 }
 
-const getDirectedMovies = async () => {
-    try {
-        const url = `${PUBLIC_CRUD_API_URL}/movies?director=${person._id}`
-        const res = await fetch(url)
-        const data = await res.json()
-        directedMovies = data.items
-    } catch (error) {
-        alert('Failed to get person')
-        console.error(error)
-    } 
-} 
 
-const getMoviesStarredIn = async () => {
-    // Not working yet
-    try {
-        const url = `${PUBLIC_CRUD_API_URL}/movies?actors=${person._id}`
-        const res = await fetch(url)
-        const data = await res.json()
-        moviesStarredin = data.items
-    } catch (error) {
-        alert('Failed to get person')
-        console.error(error)
-    } 
-} 
 
 const deletePerson = async () => {
     if(!confirm(`Delete ${person.name}?`)) return

@@ -35,7 +35,7 @@ import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 import Card, { Content, Actions, } from '@smui/card'
 import { onMount } from 'svelte'
 
-import NewPersonDialog from '$lib/NewPersonDialog.svelte';
+import NewPersonDialog from '$lib/persons/NewPersonDialog.svelte';
 
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 

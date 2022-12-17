@@ -76,8 +76,8 @@
 import type Movie from 'src/types/movie';
 import type Person from 'src/types/person';
 
-import EditMovieDirector from '$lib/EditMovieDirector.svelte';
-import AddActorDialog from '$lib/AddActorDialog.svelte';
+import EditMovieDirector from '$lib/movies/[_id]/EditDirector.svelte';
+import AddActorDialog from '$lib/movies/[_id]/AddActorDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
