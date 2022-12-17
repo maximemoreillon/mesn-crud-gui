@@ -1,0 +1,52 @@
+@use 'sass:color';
+
+@use '@material/theme/color-palette';
+
+// Svelte Colors!
+@use '@material/theme/index' as theme with (
+  $primary: #ff3e00,
+  $secondary: #676778,
+  $surface: #fff,
+  $background: #fff,
+  $error: color-palette.$red-900
+);
+
+
+// Typography
+@use '@material/typography/mdc-typography';
+@use '@material/typography/index' as typography;
+
+html,
+body {
+  // background-color: theme.$surface;
+  background-color: #eeeeee;
+  color: theme.$on-surface;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #40b3ff;
+}
+a:visited {
+  color: color.scale(#40b3ff, $lightness: -35%);
+}
+
+
+code,
+pre {
+  font-family: 'Roboto Mono', monospace;
+}
+
+small {
+  font-size: 0.9em;
+}
+
+big {
+  font-size: 1.1em;
+}
+
+b,
+strong {
+  font-weight: bold;
+}

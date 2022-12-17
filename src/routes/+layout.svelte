@@ -1,19 +1,12 @@
 <Drawer variant="dismissible" bind:open>
   <Content>
-    <!-- TODO: icons -->
     <List>
-      <Item href="/movies">
-          <Graphic class="material-icons">movie</Graphic>
-          <Text>Movies</Text>
+      {#each links as link}
+        <Item href={link.href}>
+        <Graphic class="material-icons">{link.icon}</Graphic>
+        <Text>{link.text}</Text>
       </Item>
-      <Item href="/persons">
-        <Graphic class="material-icons">person</Graphic>
-        <Text>Persons</Text>
-      </Item>
-      <Item href="/about">
-        <Graphic class="material-icons">help</Graphic>
-        <Text>About</Text>
-      </Item>
+      {/each}
     </List>
   </Content>
 </Drawer>
@@ -38,18 +31,26 @@
 
 <script lang="ts">
     
+
+import IconButton from '@smui/icon-button';
+import Drawer, { AppContent, Content } from '@smui/drawer';
+import List, { Item, Text, Graphic} from '@smui/list';
 import TopAppBar, {
     Row,
     Section,
     Title,
     AutoAdjust,
 } from '@smui/top-app-bar';
-import IconButton from '@smui/icon-button';
-import Drawer, { AppContent, Content } from '@smui/drawer';
-import List, { Item, Text, Graphic} from '@smui/list';
 
 let topAppBar: TopAppBar;
 let open = false
+
+const links = [
+  { text: 'Home', href: '/', icon: 'home'},
+  { text: 'Movies', href: '/movies', icon: 'movie'},
+  { text: 'Persons', href: '/persons', icon: 'person'},
+  { text: 'About', href: '/about', icon: 'help'},
+]
 
 </script>
 

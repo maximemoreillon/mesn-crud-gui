@@ -1,10 +1,9 @@
-<Card padded>
-  <h2 class="mdc-typography--headline6">
-    Home
-  </h2>
+<Card>
   <Content>
+    <h2 style="margin: 0;">Home</h2>
+    
     <p>
-        This is an example Svelte application performing CRUD operations in a MongoDB database. 
+      This is an example Svelte application performing CRUD operations in a MongoDB database. 
     </p>
     <p>
       <a href="/movies">Movies</a>
