@@ -10,7 +10,7 @@
         {#each actors as actor}
             <Row>
                 <Cell>
-                    <a href={`/movies/${actor._id}`}>{actor.name || 'Unnamed actor'}</a>
+                    <a href={`/persons/${actor._id}`}>{actor.name || 'Unnamed actor'}</a>
                 </Cell>
                 <Cell>
                     <IconButton on:click={() => removeActor(actor)} class="material-icons">
