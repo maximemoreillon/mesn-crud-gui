@@ -47,7 +47,7 @@ import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 import Card, { Content, Actions, } from '@smui/card'
 import { onMount } from 'svelte'
 
-import NewMovieDialog from '/src/components/NewMovieDialog.svelte';
+import NewMovieDialog from '$lib/NewMovieDialog.svelte';
 
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 

@@ -38,14 +38,16 @@
     import { goto } from '$app/navigation';
     import LayoutGrid, { Cell } from '@smui/layout-grid';
 
-    import type Person from 'src/types/person'
-
     import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 
     let open = false;
 
-    const newPerson: Person = { name: '' }
+    type NewPerson = {
+        name: string
+    }
+
+    const newPerson: NewPerson = { name: '' }
 
     const createMovie = async () => {
         const url = `${PUBLIC_CRUD_API_URL}/persons/`

@@ -42,7 +42,7 @@
             {#each movie.actors as actor}
             <Item>
                 <Text>{actor.name}</Text>
-                <Meta class="material-icons" on:click={removeActor(actor)}>delete</Meta>
+                <Meta class="material-icons" on:click={() => removeActor(actor)}>delete</Meta>
             </Item>
             {/each}
         </List>
@@ -76,8 +76,8 @@
 import type Movie from 'src/types/movie';
 import type Person from 'src/types/person';
 
-import EditMovieDirector from '/src/components/EditMovieDirector.svelte';
-import AddActorDialog from '/src/components/AddActorDialog.svelte';
+import EditMovieDirector from '$lib/EditMovieDirector.svelte';
+import AddActorDialog from '$lib/AddActorDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';

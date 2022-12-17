@@ -31,22 +31,25 @@
  
  
 <script lang="ts">
+
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
     import Fab, { Icon } from '@smui/fab';
-
     import Button, { Label } from '@smui/button';
     import Textfield from '@smui/textfield';
     import { goto } from '$app/navigation';
     import LayoutGrid, { Cell } from '@smui/layout-grid';
 
-    import type Movie from 'src/types/movie'
 
     import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 
     let open = false;
 
-    const newMovie: Movie = {title: ''}
+    type NewMovie = {
+        title: string
+    }
+
+    const newMovie: NewMovie = { title: '' }
 
     const createMovie = async () => {
         const url = `${PUBLIC_CRUD_API_URL}/movies/`
