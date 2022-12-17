@@ -17,9 +17,20 @@
         </div>
 
         {#if directedMovies}
-            <h3>Movies directed</h3>
+            <h3>Directed</h3>
             <List>
                 {#each directedMovies as movie}
+                <Item href="/movies">
+                    <Text>{movie.title}</Text>
+                </Item>
+                {/each}
+            </List>
+        {/if}
+
+        {#if moviesStarredin}
+            <h3>Starred in</h3>
+            <List>
+                {#each moviesStarredin as movie}
                 <Item href="/movies">
                     <Text>{movie.title}</Text>
                 </Item>
@@ -70,11 +81,14 @@ import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let person: Person
 let directedMovies: Movie[]
+let moviesStarredin: Movie[]
 
 let loading = false
+
 onMount( async () => {
     await getPerson()
-    await getDirectedMovies()
+    getDirectedMovies()
+    getMoviesStarredIn()
 })
 
 const {_id} = $page.params
@@ -100,6 +114,19 @@ const getDirectedMovies = async () => {
         const res = await fetch(url)
         const data = await res.json()
         directedMovies = data.items
+    } catch (error) {
+        alert('Failed to get person')
+        console.error(error)
+    } 
+} 
+
+const getMoviesStarredIn = async () => {
+    // Not working yet
+    try {
+        const url = `${PUBLIC_CRUD_API_URL}/movies?actors=${person._id}`
+        const res = await fetch(url)
+        const data = await res.json()
+        moviesStarredin = data.items
     } catch (error) {
         alert('Failed to get person')
         console.error(error)
