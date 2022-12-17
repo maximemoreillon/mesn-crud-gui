@@ -12,6 +12,7 @@
                     <Row>
                         <Cell>Title</Cell>
                         <Cell>Year</Cell>
+                        <Cell>Director</Cell>
                     </Row>
                 </Head>
                 <Body>
@@ -21,6 +22,15 @@
                                 <a href={`/movies/${movie._id}`}>{movie.title}</a>
                             </Cell>
                             <Cell>{movie.year}</Cell>
+                            {#if movie.director}
+                            <Cell>
+                                {movie.director.name}
+                            </Cell>
+                            {:else}
+                            <Cell>
+                                Undefined
+                            </Cell>
+                            {/if}
                         </Row>
                     {/each}
                 </Body>

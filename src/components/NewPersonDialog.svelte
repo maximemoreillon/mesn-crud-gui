@@ -3,12 +3,12 @@
   aria-labelledby="simple-title"
   aria-describedby="simple-content">
   <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-  <Title id="simple-title">New movie</Title>
+  <Title id="simple-title">New person</Title>
   <form on:submit={createMovie}>
   <Content id="simple-content">
     <LayoutGrid>
         <Cell>
-            <Textfield bind:value={newMovie.title} label="Title" />
+            <Textfield bind:value={newPerson.name} label="Name" />
         </Cell>
     </LayoutGrid>
 
@@ -18,7 +18,7 @@
             <Label>Cancel</Label>
         </Button>
         <Button type="submit">
-            <Label>Create movie</Label>
+            <Label>Create person</Label>
         </Button>
     </Actions>
 </form>
@@ -38,28 +38,28 @@
     import { goto } from '$app/navigation';
     import LayoutGrid, { Cell } from '@smui/layout-grid';
 
-    import type Movie from 'src/types/movie'
+    import type Person from 'src/types/person'
 
     import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 
     let open = false;
 
-    const newMovie: Movie = {title: ''}
+    const newPerson: Person = { name: '' }
 
     const createMovie = async () => {
-        const url = `${PUBLIC_CRUD_API_URL}/movies/`
+        const url = `${PUBLIC_CRUD_API_URL}/persons/`
         const options = { 
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(newMovie)
+            body: JSON.stringify(newPerson)
         }
         const res = await fetch(url, options)
         const {_id} = await res.json()
 
-        goto(`/movies/${_id}`)
+        goto(`/persons/${_id}`)
     }
 </script>

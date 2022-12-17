@@ -1,30 +1,50 @@
-<Card padded>
-    
+<Card>
+
+
     {#if loading}
         <LinearProgress indeterminate/>
+
     {:else if movie}
 
-        <a href="/movies">Return</a>
+    <IconButton href="/movies" class="material-icons">
+        arrow_back
+    </IconButton>
 
-        <h2 class="mdc-typography--headline6" style="margin: 0;">
-            {movie.title}
-        </h2>
-        <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
-            {movie.year}
-        </h3>
-        <Content>
-            <LayoutGrid>
-                <Cell>
+
+
+            
+
+            <Content>
+                <h2 class="mdc-typography--headline6" style="margin: 0;">
+                    {movie.title}
+                </h2>
+                <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
+                    {movie.year}
+                </h3>
+
+                {#if movie.director}
+                    <div>
+                        Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>  <EditMovieDirector on:directorSelected={directorSelectedHandler}/>
+                    </div>
+                {:else}
+                    <div>
+                        Unknown director<EditMovieDirector on:directorSelected={directorSelectedHandler}/>
+                    </div>
+                {/if}
+
+                <div>
                     <Textfield bind:value={movie.title} label="Title" />
-                </Cell>
-                <Cell>
+                </div>
+                <div>
                     <Textfield type="number" bind:value={movie.year} label="Year" />
-                </Cell>
-            </LayoutGrid>
-        </Content>
 
-        <Actions>
-            <ActionButtons>
+                </div>
+            </Content>
+        
+
+            
+
+            <Actions>
                 <Button type="submit" on:click={deleteMovie}>
                     <Icon class="material-icons">delete</Icon>
                     <Label>Delete movie</Label>
@@ -33,26 +53,34 @@
                     <Icon class="material-icons">save</Icon>
                     <Label>Save movie</Label>
                 </Button>
-            </ActionButtons>
-        </Actions>
+            </Actions>
+
+            
+            
+
+  
 
     {:else}
 
-    <Content>
+    <div>
         No data
-    </Content>
+    </div>
     
     {/if}
 </Card>
 
 <script lang="ts">
+import type Movie from 'src/types/movie';
+import type Person from 'src/types/person';
+
+import EditMovieDirector from '/src/components/EditMovieDirector.svelte';
+
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import Textfield from '@smui/textfield';
-import LayoutGrid, { Cell } from '@smui/layout-grid';
 import LinearProgress from '@smui/linear-progress';
+import IconButton from '@smui/icon-button';
 
-import type Movie from 'src/types/movie';
 
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
@@ -62,6 +90,7 @@ import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let movie: Movie
 let loading = false
+
 onMount( () => {
     getMovie()
 })
@@ -82,6 +111,8 @@ const getMovie = async () => {
         loading = false
     }
 }
+
+
 
 const deleteMovie = async () => {
     if(!confirm(`Delete ${movie.title}?`)) return
@@ -110,6 +141,11 @@ const saveMovie = async () => {
     } catch (error) {
         alert('Update failed')
     }
+}
+
+const directorSelectedHandler = (event: CustomEvent) => {
+    const director : Person = event.detail
+    movie.director = director
 }
 
 </script>
