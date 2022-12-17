@@ -38,14 +38,7 @@
         </div>
 
         <h3>Actors</h3>
-        <List class="demo-list">
-            {#each movie.actors as actor}
-            <Item>
-                <Text>{actor.name}</Text>
-                <Meta class="material-icons" on:click={() => removeActor(actor)}>delete</Meta>
-            </Item>
-            {/each}
-        </List>
+        <Actors actors={movie.actors} />
         <AddActorDialog on:selection={actorAddHandler} />
             
 
@@ -78,13 +71,13 @@ import type Person from 'src/types/person';
 
 import EditMovieDirector from '$lib/movies/[_id]/EditDirector.svelte';
 import AddActorDialog from '$lib/movies/[_id]/AddActorDialog.svelte';
+import Actors from '$lib/movies/[_id]/Actors.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import Textfield from '@smui/textfield';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
-import List, { Item, Text, Meta } from '@smui/list';
 
 
 import { page } from '$app/stores';
