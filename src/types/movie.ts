@@ -4,6 +4,7 @@ type Movie = {
     title: string,
     year?: number,
     director?: Person,
+    actors: Person[]
     _id?: string,
 }
 

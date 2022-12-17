@@ -19,7 +19,7 @@
                     {#each movies as movie}
                         <Row>
                             <Cell>
-                                <a href={`/movies/${movie._id}`}>{movie.title}</a>
+                                <a href={`/movies/${movie._id}`}>{movie.title || 'Untitled movie'}</a>
                             </Cell>
                             <Cell>{movie.year}</Cell>
                             {#if movie.director}

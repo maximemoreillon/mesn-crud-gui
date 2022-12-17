@@ -10,55 +10,63 @@
         arrow_back
     </IconButton>
 
+    <Content>
+        <h2 class="mdc-typography--headline6" style="margin: 0;">
+            {movie.title || 'Untitled movie'}
+        </h2>
+        <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
+            {movie.year}
+        </h3>
 
-
-            
-
-            <Content>
-                <h2 class="mdc-typography--headline6" style="margin: 0;">
-                    {movie.title}
-                </h2>
-                <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
-                    {movie.year}
-                </h3>
-
+        <div>
                 {#if movie.director}
-                    <div>
-                        Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>  <EditMovieDirector on:directorSelected={directorSelectedHandler}/>
-                    </div>
+                <span>
+
+                    Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
+                </span>
                 {:else}
-                    <div>
-                        Unknown director<EditMovieDirector on:directorSelected={directorSelectedHandler}/>
-                    </div>
+                <span>Unknown director</span>
                 {/if}
+                <EditMovieDirector on:selection={directorSelectedHandler}/>
+            </div>
 
-                <div>
-                    <Textfield bind:value={movie.title} label="Title" />
-                </div>
-                <div>
-                    <Textfield type="number" bind:value={movie.year} label="Year" />
 
-                </div>
-            </Content>
+        <div>
+            <Textfield bind:value={movie.title} label="Title" />
+        </div>
+        <div>
+            <Textfield type="number" bind:value={movie.year} label="Year" />
+        </div>
+
+        <div>
+            <h3>Actors</h3>
+            {#if movie.actors.length}
+            <List class="demo-list">
+                {#each movie.actors as actor}
+                <Item>
+                    <Text>{actor.name}</Text>
+                    <Meta class="material-icons" on:click={removeActor(actor)}>delete</Meta>
+                </Item>
+                {/each}
+            </List>
+            {/if}
+            <AddActorDialog on:selection={actorAddHandler} />
+            
+        </div>
+
+
+    </Content>
         
-
-            
-
-            <Actions>
-                <Button type="submit" on:click={deleteMovie}>
-                    <Icon class="material-icons">delete</Icon>
-                    <Label>Delete movie</Label>
-                </Button>
-                <Button type="submit" on:click={saveMovie}>
-                    <Icon class="material-icons">save</Icon>
-                    <Label>Save movie</Label>
-                </Button>
-            </Actions>
-
-            
-            
-
-  
+    <Actions>
+        <Button type="submit" on:click={deleteMovie}>
+            <Icon class="material-icons">delete</Icon>
+            <Label>Delete movie</Label>
+        </Button>
+        <Button type="submit" on:click={saveMovie}>
+            <Icon class="material-icons">save</Icon>
+            <Label>Save movie</Label>
+        </Button>
+    </Actions>
 
     {:else}
 
@@ -74,12 +82,14 @@ import type Movie from 'src/types/movie';
 import type Person from 'src/types/person';
 
 import EditMovieDirector from '/src/components/EditMovieDirector.svelte';
+import AddActorDialog from '/src/components/AddActorDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import Textfield from '@smui/textfield';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
+import List, { Item, Text, Meta } from '@smui/list';
 
 
 import { page } from '$app/stores';
@@ -146,6 +156,20 @@ const saveMovie = async () => {
 const directorSelectedHandler = (event: CustomEvent) => {
     const director : Person = event.detail
     movie.director = director
+}
+
+const actorAddHandler = (event: CustomEvent) => {
+    const newActor: Person = event.detail
+    // Note: Svelte reactivity works by assignment
+    movie.actors = [...movie.actors, newActor]
+}
+
+const removeActor = (actor: Person) => {
+    const actorIndex = movie.actors.findIndex( ({_id}) => _id === actor._id)
+    if(actorIndex >= 0) {
+        movie.actors.splice(actorIndex, 1)
+        movie.actors = movie.actors
+    }
 }
 
 </script>
