@@ -12,13 +12,22 @@
             {person.name}
         </h2>
 
-        <Content>
-            <LayoutGrid>
-                <Cell>
-                    <Textfield bind:value={person.name} label="Name" />
-                </Cell>
-            </LayoutGrid>
-        </Content>
+        <div>
+            <Textfield bind:value={person.name} label="Name" />
+        </div>
+
+        {#if directedMovies}
+            <h3>Movies directed</h3>
+            <List>
+                {#each directedMovies as movie}
+                <Item href="/movies">
+                    <Text>{movie.title}</Text>
+                </Item>
+                {/each}
+            </List>
+        {/if}
+        
+
 
         <Actions>
             <ActionButtons>
@@ -46,11 +55,12 @@
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import Textfield from '@smui/textfield';
-import LayoutGrid, { Cell } from '@smui/layout-grid';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
+import List, { Item, Text } from '@smui/list';
 
 import type Person from 'src/types/person';
+import type Movie from 'src/types/movie';
 
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
@@ -59,9 +69,12 @@ import { goto } from '$app/navigation';
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let person: Person
+let directedMovies: Movie[]
+
 let loading = false
-onMount( () => {
-    getPerson()
+onMount( async () => {
+    await getPerson()
+    await getDirectedMovies()
 })
 
 const {_id} = $page.params
@@ -80,6 +93,18 @@ const getPerson = async () => {
         loading = false
     }
 }
+
+const getDirectedMovies = async () => {
+    try {
+        const url = `${PUBLIC_CRUD_API_URL}/movies?director=${person._id}`
+        const res = await fetch(url)
+        const data = await res.json()
+        directedMovies = data.items
+    } catch (error) {
+        alert('Failed to get person')
+        console.error(error)
+    } 
+} 
 
 const deletePerson = async () => {
     if(!confirm(`Delete ${person.name}?`)) return

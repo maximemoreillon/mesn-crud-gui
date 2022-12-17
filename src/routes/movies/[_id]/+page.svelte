@@ -19,16 +19,15 @@
         </h3>
 
         <div>
-                {#if movie.director}
-                <span>
-
-                    Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
-                </span>
-                {:else}
-                <span>Unknown director</span>
-                {/if}
-                <EditMovieDirector on:selection={directorSelectedHandler}/>
-            </div>
+            {#if movie.director}
+            <span>
+                Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
+            </span>
+            {:else}
+            <span>Unknown director</span>
+            {/if}
+            <EditMovieDirector on:selection={directorSelectedHandler}/>
+        </div>
 
 
         <div>
@@ -38,21 +37,17 @@
             <Textfield type="number" bind:value={movie.year} label="Year" />
         </div>
 
-        <div>
-            <h3>Actors</h3>
-            {#if movie.actors.length}
-            <List class="demo-list">
-                {#each movie.actors as actor}
-                <Item>
-                    <Text>{actor.name}</Text>
-                    <Meta class="material-icons" on:click={removeActor(actor)}>delete</Meta>
-                </Item>
-                {/each}
-            </List>
-            {/if}
-            <AddActorDialog on:selection={actorAddHandler} />
+        <h3>Actors</h3>
+        <List class="demo-list">
+            {#each movie.actors as actor}
+            <Item>
+                <Text>{actor.name}</Text>
+                <Meta class="material-icons" on:click={removeActor(actor)}>delete</Meta>
+            </Item>
+            {/each}
+        </List>
+        <AddActorDialog on:selection={actorAddHandler} />
             
-        </div>
 
 
     </Content>

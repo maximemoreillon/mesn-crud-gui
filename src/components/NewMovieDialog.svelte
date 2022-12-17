@@ -5,23 +5,24 @@
   <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
   <Title id="simple-title">New movie</Title>
   <form on:submit={createMovie}>
-  <Content id="simple-content">
-    <LayoutGrid>
-        <Cell>
-            <Textfield bind:value={newMovie.title} label="Title" />
-        </Cell>
-    </LayoutGrid>
+    <Content id="simple-content">
+        <LayoutGrid>
+            <Cell>
+                <Textfield bind:value={newMovie.title} label="Title" />
+            </Cell>
+        </LayoutGrid>
 
-    </Content>
-    <Actions>
-        <Button on:click={() => (open = false)}>
-            <Label>Cancel</Label>
-        </Button>
-        <Button type="submit">
-            <Label>Create movie</Label>
-        </Button>
-    </Actions>
-</form>
+        </Content>
+        <Actions>
+            <!-- BUG: This button submits the form -->
+            <Button on:click={() => (open = false)}>
+                <Label>Cancel</Label>
+            </Button>
+            <Button type="submit">
+                <Label>Create movie</Label>
+            </Button>
+        </Actions>
+    </form>
 </Dialog>
  
 <Fab on:click={() => (open = true)}>
