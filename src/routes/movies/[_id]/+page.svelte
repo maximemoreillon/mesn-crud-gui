@@ -25,32 +25,26 @@
 
     <Content>
         <EditableContentDialog bind:content={movie.title} label="Title">
-            <h2 style="margin: 0;">
-                {movie.title || 'Untitled movie'}
-            </h2>
+            <h2 style="margin: 0;">{movie.title || 'Untitled movie'}</h2>
         </EditableContentDialog>
 
         <EditableContentDialog bind:content={movie.year} label="Year">
-            <div class="mdc-typography--subtitle1" style="margin: 0; color: #888;">
-                {movie.year}
-            </div>
+            <div class="mdc-typography--subtitle1" style="color: #888;">{movie.year}</div>
         </EditableContentDialog>
-        
 
+        <h3>Director</h3>
         <div>
             {#if movie.director}
-            <span>
-                Directed by <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
-            </span>
+                <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
             {:else}
-            <span>Unknown director</span>
+                <span>Unknown director</span>
             {/if}
             <EditMovieDirector on:selection={directorSelectedHandler}/>
         </div>
 
         <h3>Actors</h3>
-        <Actors actors={movie.actors} />
         <AddActorDialog on:selection={actorAddHandler} />
+        <Actors actors={movie.actors} />
             
     </Content>
         

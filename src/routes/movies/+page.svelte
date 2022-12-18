@@ -1,8 +1,8 @@
 <Card>
-    <Content>
-        <h2 style="margin: 0;">
-            Movies
-        </h2>
+    <Content class="toolbar">
+        <h2 style="margin: 0;">Movies</h2>
+        <div class="spacer"></div>
+        <NewMovieDialog />
     </Content>
     <Content>
     {#if movies.length}
@@ -37,9 +37,7 @@
         </DataTable>
     {/if}
     </Content>
-    <Actions>
-        <NewMovieDialog />
-    </Actions>
+    
 </Card>
 
 

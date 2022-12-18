@@ -1,8 +1,8 @@
 <Card >
-    <Content>
-        <h2 style="margin: 0;">
-        Persons
-        </h2>
+    <Content class="toolbar">
+        <h2 style="margin: 0;">Persons</h2>
+        <div class="spacer"></div>
+        <NewPersonDialog />
     </Content>
     <Content>
         {#if persons.length}
@@ -27,9 +27,7 @@
             </DataTable>
         {/if}
       </Content>
-      <Actions>
-        <NewPersonDialog />
-    </Actions>
+
 </Card>
 
 
