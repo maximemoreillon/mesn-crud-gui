@@ -1,35 +1,27 @@
 {#if actors}
-<DataTable style="width: 100%;">
-    <Head>
-        <Row>
-            <Cell>Name</Cell>
-            <Cell>Remove</Cell>
-        </Row>
-    </Head>
-    <Body>
-        {#each actors as actor}
-            <Row>
-                <Cell>
-                    <a href={`/persons/${actor._id}`}>{actor.name || 'Unnamed actor'}</a>
-                </Cell>
-                <Cell>
-                    <IconButton on:click={() => removeActor(actor)} class="material-icons">
-                        delete
-                    </IconButton>
-                </Cell>
-            </Row>
-        {/each}
-    </Body>
-</DataTable>
+<List>
+    {#each actors as actor}
+        <Item>
+            <Text>
+                <a href={`/persons/${actor._id}`}>{actor.name}</a>
+            </Text>
+            <Meta class="material-icons" on:click={() => removeActor(actor)}>
+                delete
+            </Meta>
+        </Item>
+    {/each}
+</List>
 {/if}
 
 <script lang="ts">
 
 import type Person from 'src/types/person';
 
-import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
-import IconButton from '@smui/icon-button';
-
+import List, {
+    Item,
+    Text,
+    Meta
+} from '@smui/list';
 
 export let actors: Person[]
 

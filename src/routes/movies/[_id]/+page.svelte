@@ -31,19 +31,21 @@
         <EditableContentDialog bind:content={movie.year} label="Year">
             <div class="mdc-typography--subtitle1" style="color: #888;">{movie.year}</div>
         </EditableContentDialog>
-
-        <h3>Director</h3>
-        <div>
+        
+        <p>
+            Directed by
             {#if movie.director}
                 <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
             {:else}
                 <span>Unknown director</span>
             {/if}
             <EditMovieDirector on:selection={directorSelectedHandler}/>
-        </div>
+        </p>
 
         <h3>Actors</h3>
-        <AddActorDialog on:selection={actorAddHandler} />
+        <p>
+            <AddActorDialog on:selection={actorAddHandler} />
+        </p>
         <Actors actors={movie.actors} />
             
     </Content>
