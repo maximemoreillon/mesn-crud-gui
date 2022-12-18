@@ -1,5 +1,4 @@
 {#if movies && movies.length}
-
     <List twoLine>
         {#each movies as movie}
             <!-- href only seems to work if list used in a drawer -->

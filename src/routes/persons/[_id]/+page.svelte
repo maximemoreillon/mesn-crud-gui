@@ -22,9 +22,7 @@
         <Content>
 
             <EditableContentDialog bind:content={person.name} label="Name">
-                <h2 style="margin: 0;" >
-                    {person.name}
-                </h2>
+                <h2 style="margin: 0;">{person.name}</h2>
             </EditableContentDialog>
 
 
