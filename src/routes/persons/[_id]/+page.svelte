@@ -4,20 +4,29 @@
         <LinearProgress indeterminate/>
     {:else if person}
 
-        <Actions>
+        <Actions class="toolbar">
             <IconButton href="/persons" class="material-icons">
                 arrow_back
             </IconButton>
+            <div class="spacer"></div>
+            <Button type="submit" on:click={deletePerson}>
+                <Icon class="material-icons">delete</Icon>
+                <Label>Delete person</Label>
+            </Button>
+            <Button type="submit" on:click={savePerson}>
+                <Icon class="material-icons">save</Icon>
+                <Label>Save person</Label>
+            </Button>
         </Actions>
 
         <Content>
 
+            <EditableContentDialog bind:content={person.name} label="Name">
+                <h2 style="margin: 0;" >
+                    {person.name}
+                </h2>
+            </EditableContentDialog>
 
-            <h2 style="margin: 0;" >
-                {person.name}
-            </h2>
-
-            <Textfield bind:value={person.name} label="Name" class="mdc-typography--headline2" />
 
             <h3>Directed</h3>
             <RelatedMovies query="director"/>
@@ -26,20 +35,6 @@
             <RelatedMovies query="actors"/>
         </Content>
 
-        
-
-        <Actions>
-            <ActionButtons>
-                <Button type="submit" on:click={deletePerson}>
-                    <Icon class="material-icons">delete</Icon>
-                    <Label>Delete person</Label>
-                </Button>
-                <Button type="submit" on:click={savePerson}>
-                    <Icon class="material-icons">save</Icon>
-                    <Label>Save person</Label>
-                </Button>
-            </ActionButtons>
-        </Actions>
 
     {:else}
 
@@ -53,13 +48,13 @@
 <script lang="ts">
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
-import Textfield from '@smui/textfield';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
 
 import type Person from 'src/types/person';
 
 import RelatedMovies from '$lib/persons/[_id]/RelatedMovies.svelte';
+import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 
 import { page } from '$app/stores';
 import { onMount } from 'svelte';

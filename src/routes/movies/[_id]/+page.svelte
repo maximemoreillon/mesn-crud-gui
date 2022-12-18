@@ -1,15 +1,25 @@
 <Card>
 
-
     {#if loading}
         <LinearProgress indeterminate/>
 
     {:else if movie}
 
-    <Actions>
+    <Actions class="toolbar">
         <IconButton href="/movies" class="material-icons">
             arrow_back
         </IconButton>
+
+        <div class="spacer"></div>
+
+        <Button type="submit" on:click={deleteMovie}>
+            <Icon class="material-icons">delete</Icon>
+            <Label>Delete movie</Label>
+        </Button>
+        <Button type="submit" on:click={saveMovie}>
+            <Icon class="material-icons">save</Icon>
+            <Label>Save movie</Label>
+        </Button>
     </Actions>
     
 
@@ -38,33 +48,12 @@
             <EditMovieDirector on:selection={directorSelectedHandler}/>
         </div>
 
-
-        <div>
-            <Textfield bind:value={movie.title} label="Title" />
-        </div>
-        <div>
-            <Textfield type="number" bind:value={movie.year} label="Year" />
-        </div>
-
         <h3>Actors</h3>
         <Actors actors={movie.actors} />
         <AddActorDialog on:selection={actorAddHandler} />
             
-
-
     </Content>
         
-    <Actions>
-        <Button type="submit" on:click={deleteMovie}>
-            <Icon class="material-icons">delete</Icon>
-            <Label>Delete movie</Label>
-        </Button>
-        <Button type="submit" on:click={saveMovie}>
-            <Icon class="material-icons">save</Icon>
-            <Label>Save movie</Label>
-        </Button>
-    </Actions>
-
     {:else}
 
     <div>
@@ -85,7 +74,6 @@ import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
-import Textfield from '@smui/textfield';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
 
@@ -162,12 +150,6 @@ const actorAddHandler = (event: CustomEvent) => {
     movie.actors = [...movie.actors, newActor]
 }
 
-const removeActor = (actor: Person) => {
-    const actorIndex = movie.actors.findIndex( ({_id}) => _id === actor._id)
-    if(actorIndex >= 0) {
-        movie.actors.splice(actorIndex, 1)
-        movie.actors = movie.actors
-    }
-}
 
 </script>
+

@@ -83,3 +83,14 @@ b,
 strong {
   font-weight: bold;
 }
+
+
+// Custom helper classes
+
+.toolbar {
+  display: flex;
+}
+
+.spacer {
+  flex-grow: 1;
+}

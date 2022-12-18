@@ -1,6 +1,6 @@
 <Card>
     <Content>
-    <h2>
+    <h2 >
         Movies
     </h2>
     {#if movies.length}
