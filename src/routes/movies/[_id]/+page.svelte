@@ -2,59 +2,50 @@
 
     {#if loading}
         <LinearProgress indeterminate/>
-
     {:else if movie}
+        <Content>
+            <EditableContentDialog bind:content={movie.title} label="Title">
+                <h2 style="margin: 0;">{movie.title || 'Untitled movie'}</h2>
+            </EditableContentDialog>
 
-    <Actions class="toolbar">
-        <IconButton href="/movies" class="material-icons">
-            arrow_back
-        </IconButton>
-
-        <div class="spacer"></div>
-
-        <Button type="submit" on:click={deleteMovie}>
-            <Icon class="material-icons">delete</Icon>
-            <Label>Delete movie</Label>
-        </Button>
-        <Button type="submit" on:click={saveMovie}>
-            <Icon class="material-icons">save</Icon>
-            <Label>Save movie</Label>
-        </Button>
-    </Actions>
-    
-
-    <Content>
-        <EditableContentDialog bind:content={movie.title} label="Title">
-            <h2 style="margin: 0;">{movie.title || 'Untitled movie'}</h2>
-        </EditableContentDialog>
-
-        <EditableContentDialog bind:content={movie.year} label="Year">
-            <div class="mdc-typography--subtitle1" style="color: #888;">{movie.year}</div>
-        </EditableContentDialog>
-        
-        <p>
-            Directed by
-            {#if movie.director}
-                <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
-            {:else}
-                <span>Unknown director</span>
-            {/if}
-            <EditMovieDirector on:selection={directorSelectedHandler}/>
-        </p>
-
-        <h3>Actors</h3>
-        <p>
-            <AddActorDialog on:selection={actorAddHandler} />
-        </p>
-        <Actors actors={movie.actors} />
+            <EditableContentDialog bind:content={movie.year} label="Year">
+                <div class="mdc-typography--subtitle1" style="color: #888;">{movie.year}</div>
+            </EditableContentDialog>
             
-    </Content>
+            <p>
+                Directed by
+                {#if movie.director}
+                    <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
+                {:else}
+                    <span>Unknown director</span>
+                {/if}
+                <EditMovieDirector on:selection={directorSelectedHandler}/>
+            </p>
+
+            <h5>Actors</h5>
+            <AddActorDialog on:selection={actorAddHandler} />
+            <Actors actors={movie.actors} />
+                
+        </Content>
+
+        <Actions>
+            <ActionButtons>
+                <Button type="submit" on:click={deleteMovie}>
+                    <Icon class="material-icons">delete</Icon>
+                    <Label>Delete movie</Label>
+                </Button>
+                <Button type="submit" on:click={saveMovie}>
+                    <Icon class="material-icons">save</Icon>
+                    <Label>Save movie</Label>
+                </Button>
+            </ActionButtons>
+        </Actions>
         
     {:else}
 
-    <div>
+    <Content>
         No data
-    </div>
+    </Content>
     
     {/if}
 </Card>

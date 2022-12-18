@@ -22,16 +22,16 @@
     </form>
 </Dialog>
  
-<Fab on:click={() => (open = true)}>
+<Button on:click={() => (open = true)}>
     <Icon class="material-icons">add</Icon>
-</Fab>
+    <Label>Add movie</Label>
+</Button>
  
  
 <script lang="ts">
 
 import Dialog, { Title, Content, Actions } from '@smui/dialog';
-import Fab, { Icon } from '@smui/fab';
-import Button, { Label } from '@smui/button';
+import Button, { Label, Icon } from '@smui/button';
 import Textfield from '@smui/textfield';
 import { goto } from '$app/navigation';
 import LayoutGrid, { Cell } from '@smui/layout-grid';

@@ -13,7 +13,9 @@
         {/each}
     </List>
 {:else}
-    None
+    <Content>
+        None
+    </Content>
 {/if}
 
 <script lang="ts">
@@ -22,7 +24,7 @@ import type Movie from 'src/types/movie';
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
-
+import { Content } from '@smui/card';
 import List, {
     Item,
     Text,

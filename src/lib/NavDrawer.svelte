@@ -24,7 +24,11 @@ import Drawer, {
     Title,
     Subtitle,
 } from '@smui/drawer';
-import List, { Item, Text, Graphic} from '@smui/list';
+import List, { 
+    Item, 
+    Text, 
+    Graphic,
+} from '@smui/list';
 
 
 export let open = false

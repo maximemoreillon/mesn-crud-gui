@@ -1,51 +1,51 @@
 <Card >
     
     {#if loading}
-        <LinearProgress indeterminate/>
+        <Content>
+            <LinearProgress indeterminate/>
+        </Content>
     {:else if person}
-
-        <Actions class="toolbar">
-            <IconButton href="/persons" class="material-icons">
-                arrow_back
-            </IconButton>
-            <div class="spacer"></div>
-            <Button type="submit" on:click={deletePerson}>
-                <Icon class="material-icons">delete</Icon>
-                <Label>Delete person</Label>
-            </Button>
-            <Button type="submit" on:click={savePerson}>
-                <Icon class="material-icons">save</Icon>
-                <Label>Save person</Label>
-            </Button>
-        </Actions>
-
         <Content>
 
             <EditableContentDialog bind:content={person.name} label="Name">
-                <h2 style="margin: 0;">{person.name}</h2>
+                <h2>{person.name}</h2>
             </EditableContentDialog>
 
-
-            <h3>Directed</h3>
+            <h5>Directed</h5>
             <RelatedMovies query="director"/>
 
-            <h3>Starred in</h3>
+            <h5>Starred in</h5>
             <RelatedMovies query="actors"/>
         </Content>
-
-
+        <Actions>
+            <ActionButtons>
+                <Button type="submit" on:click={deletePerson}>
+                    <Icon class="material-icons">delete</Icon>
+                    <Label>Delete person</Label>
+                </Button>
+                <Button type="submit" on:click={savePerson}>
+                    <Icon class="material-icons">save</Icon>
+                    <Label>Save person</Label>
+                </Button>
+            </ActionButtons>
+        </Actions>
     {:else}
-
-    <Content>
-        No data
-    </Content>
-    
+        <Content>
+            No data
+        </Content>
     {/if}
+
+    
 </Card>
 
 <script lang="ts">
 import Button, { Label, Icon } from '@smui/button';
-import Card, { Content, Actions, ActionButtons } from '@smui/card';
+import Card, { 
+    Content, 
+    Actions, 
+	ActionIcons,
+	ActionButtons,
+} from '@smui/card';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
 
