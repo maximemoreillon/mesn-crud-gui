@@ -6,17 +6,26 @@
 
     {:else if movie}
 
-    <IconButton href="/movies" class="material-icons">
-        arrow_back
-    </IconButton>
+    <Actions>
+        <IconButton href="/movies" class="material-icons">
+            arrow_back
+        </IconButton>
+    </Actions>
+    
 
     <Content>
-        <h2 class="mdc-typography--headline6" style="margin: 0;">
-            {movie.title || 'Untitled movie'}
-        </h2>
-        <h3 class="mdc-typography--subtitle2" style="margin: 0; color: #888;">
-            {movie.year}
-        </h3>
+        <EditableContentDialog bind:content={movie.title} label="Title">
+            <h2 style="margin: 0;">
+                {movie.title || 'Untitled movie'}
+            </h2>
+        </EditableContentDialog>
+
+        <EditableContentDialog bind:content={movie.year} label="Year">
+            <div class="mdc-typography--subtitle1" style="margin: 0; color: #888;">
+                {movie.year}
+            </div>
+        </EditableContentDialog>
+        
 
         <div>
             {#if movie.director}
@@ -72,6 +81,7 @@ import type Person from 'src/types/person';
 import EditMovieDirector from '$lib/movies/[_id]/EditDirector.svelte';
 import AddActorDialog from '$lib/movies/[_id]/AddActorDialog.svelte';
 import Actors from '$lib/movies/[_id]/Actors.svelte';
+import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';

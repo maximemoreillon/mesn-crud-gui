@@ -1,6 +1,5 @@
 <Dialog
   bind:open>
-  <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
   <Title id="simple-title">Add an actor</Title>
   <Content>
     <PersonSelectionTable on:selection={ (event) => selectionHandler(event.detail) }/>
@@ -13,6 +12,7 @@
 </Dialog>
  
 <Button on:click={() => (open = true)}>
+    <Icon class="material-icons">person_add</Icon>
     <Label>Add actor</Label>
 </Button>
 
@@ -26,7 +26,7 @@ import PersonSelectionTable from '$lib/movies/[_id]/PersonSelectionTable.svelte'
 
 import { createEventDispatcher} from 'svelte';
 
-import Button, { Label } from '@smui/button';
+import Button, { Label, Icon} from '@smui/button';
 import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
 

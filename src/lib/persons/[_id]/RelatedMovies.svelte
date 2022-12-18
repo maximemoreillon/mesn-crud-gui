@@ -1,30 +1,38 @@
-{#if movies}
-<DataTable style="width: 100%;">
-    <Head>
-        <Row>
-            <Cell>Title</Cell>
-            <Cell>Year</Cell>
-        </Row>
-    </Head>
-    <Body>
-        {#each movies as movie}
-            <Row>
-                <Cell>
-                    <a href={`/movies/${movie._id}`}>{movie.title || 'Untitled movie'}</a>
-                </Cell>
-                <Cell>{movie.year}</Cell>
-            </Row>
-        {/each}
-    </Body>
-</DataTable>
+{#if movies && movies.length}
+<List twoLine>
+    {#each movies as movie}
+    <Item href={`/movies/${movie._id}`}>
+        <Text>
+            <PrimaryText>{movie.title}</PrimaryText>
+            <SecondaryText>{movie.year}</SecondaryText>
+        </Text>
+    </Item>
+    {/each}
+</List>
+{:else}
+<Content>
+    None
+</Content>
+
+
 {/if}
 
 <script lang="ts">
+import type Movie from 'src/types/movie';
+
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
-import type Movie from 'src/types/movie';
-import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
+
+import { Content } from '@smui/card';
+import List, {
+Item,
+Graphic,
+Meta,
+Text,
+PrimaryText,
+SecondaryText,
+} from '@smui/list';
 
 const {_id} = $page.params
 

@@ -1,26 +1,32 @@
-<Card padded>
+<Card >
     
     {#if loading}
         <LinearProgress indeterminate/>
     {:else if person}
 
-        <IconButton href="/movies" class="material-icons">
-            arrow_back
-        </IconButton>
+        <Actions>
+            <IconButton href="/persons" class="material-icons">
+                arrow_back
+            </IconButton>
+        </Actions>
 
-        <h2 class="mdc-typography--headline6" style="margin: 0;">
-            {person.name}
-        </h2>
+        <Content>
 
-        <div>
-            <Textfield bind:value={person.name} label="Name" />
-        </div>
 
-        <h3>Directed</h3>
-        <RelatedMovies query="director"/>
+            <h2 style="margin: 0;" >
+                {person.name}
+            </h2>
 
-        <h3>Starred in</h3>
-        <RelatedMovies query="actors"/>
+            <Textfield bind:value={person.name} label="Name" class="mdc-typography--headline2" />
+
+            <h3>Directed</h3>
+            <RelatedMovies query="director"/>
+
+            <h3>Starred in</h3>
+            <RelatedMovies query="actors"/>
+        </Content>
+
+        
 
         <Actions>
             <ActionButtons>

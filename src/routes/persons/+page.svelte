@@ -1,11 +1,8 @@
-<Card padded>
-    <h2 class="mdc-typography--headline6">
-      Persons
-    </h2>
-    <Actions>
-        <NewPersonDialog />
-    </Actions>
-      <Content>
+<Card >
+    <Content>
+          <h2 >
+            Persons
+          </h2>
         {#if persons.length}
             <DataTable style="width: 100%;">
                 <Head>
@@ -25,6 +22,9 @@
             </DataTable>
         {/if}
       </Content>
+      <Actions>
+        <NewPersonDialog />
+    </Actions>
 </Card>
 
 

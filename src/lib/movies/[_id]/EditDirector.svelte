@@ -1,7 +1,6 @@
 <Dialog
   bind:open>
-  <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-  <Title id="simple-title">Select a director</Title>
+  <Title>Select a director</Title>
   <Content>
     <PersonSelectionTable on:selection={ (event) => selectionHandler(event.detail) }/>
     </Content>

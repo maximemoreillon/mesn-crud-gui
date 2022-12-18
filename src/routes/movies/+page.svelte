@@ -1,6 +1,6 @@
 <Card>
     <Content>
-    <h2 class="mdc-typography--headline6">
+    <h2>
         Movies
     </h2>
     {#if movies.length}

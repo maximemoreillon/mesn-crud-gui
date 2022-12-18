@@ -1,9 +1,6 @@
 <Dialog
-  bind:open
-  aria-labelledby="simple-title"
-  aria-describedby="simple-content">
-  <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-  <Title id="simple-title">New movie</Title>
+  bind:open>
+  <Title>New movie</Title>
   <form on:submit={createMovie}>
     <Content id="simple-content">
         <LayoutGrid>
