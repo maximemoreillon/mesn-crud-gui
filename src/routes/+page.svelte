@@ -5,9 +5,7 @@
     <p>
       This is an example Svelte application performing CRUD operations in a MongoDB database. 
     </p>
-    <p>
-      <a href="/movies">Movies</a>
-    </p>
+
   </Content>
 </Card>
 

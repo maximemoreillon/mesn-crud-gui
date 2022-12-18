@@ -32,7 +32,7 @@ import TopAppBar, {
 } from '@smui/top-app-bar';
 
 let topAppBar: TopAppBar;
-let open = false
+let open = true
 
 </script>
 
