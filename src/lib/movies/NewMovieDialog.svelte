@@ -29,38 +29,45 @@
  
 <script lang="ts">
 
-    import Dialog, { Title, Content, Actions } from '@smui/dialog';
-    import Fab, { Icon } from '@smui/fab';
-    import Button, { Label } from '@smui/button';
-    import Textfield from '@smui/textfield';
-    import { goto } from '$app/navigation';
-    import LayoutGrid, { Cell } from '@smui/layout-grid';
+import Dialog, { Title, Content, Actions } from '@smui/dialog';
+import Fab, { Icon } from '@smui/fab';
+import Button, { Label } from '@smui/button';
+import Textfield from '@smui/textfield';
+import { goto } from '$app/navigation';
+import LayoutGrid, { Cell } from '@smui/layout-grid';
 
 
-    import { PUBLIC_CRUD_API_URL } from '$env/static/public'
+import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 
-    let open = false;
+let open = false;
 
-    type NewMovie = {
-        title: string
+type NewMovie = {
+    title: string
+}
+
+const newMovie: NewMovie = { title: '' }
+
+const createMovie = async () => {
+    const url = `${PUBLIC_CRUD_API_URL}/movies/`
+    const options = { 
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify(newMovie)
     }
 
-    const newMovie: NewMovie = { title: '' }
-
-    const createMovie = async () => {
-        const url = `${PUBLIC_CRUD_API_URL}/movies/`
-        const options = { 
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(newMovie)
-        }
+    try {
         const res = await fetch(url, options)
         const {_id} = await res.json()
 
         goto(`/movies/${_id}`)
+    } catch (error) {
+        alert('Failed to create movie')
+        console.error(error)
     }
+    
+}
 </script>

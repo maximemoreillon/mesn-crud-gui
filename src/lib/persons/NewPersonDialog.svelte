@@ -47,6 +47,7 @@ type NewPerson = {
 const newPerson: NewPerson = { name: '' }
 
 const createMovie = async () => {
+
     const url = `${PUBLIC_CRUD_API_URL}/persons/`
     const options = { 
         method: 'POST',
@@ -56,9 +57,17 @@ const createMovie = async () => {
         }, 
         body: JSON.stringify(newPerson)
     }
-    const res = await fetch(url, options)
-    const {_id} = await res.json()
+    
+    try {
+        const res = await fetch(url, options)
+        const {_id} = await res.json()
 
-    goto(`/persons/${_id}`)
+        goto(`/persons/${_id}`)
+        
+    } catch (error) {
+        alert('Failed to create movie')
+        console.error(error)
+    }
+    
 }
 </script>

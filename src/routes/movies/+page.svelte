@@ -1,8 +1,10 @@
 <Card>
     <Content>
-    <h2 >
-        Movies
-    </h2>
+        <h2 style="margin: 0;">
+            Movies
+        </h2>
+    </Content>
+    <Content>
     {#if movies.length}
         <DataTable style="width: 100%;">
             <Head>
@@ -19,18 +21,19 @@
                             <a href={`/movies/${movie._id}`}>{movie.title || 'Untitled movie'}</a>
                         </Cell>
                         <Cell>{movie.year}</Cell>
-                        {#if movie.director}
                         <Cell>
+                            {#if movie.director}
                             <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
-                        </Cell>
-                        {:else}
-                        <Cell>
+                            {:else}
                             Undefined
+                            {/if}
                         </Cell>
-                        {/if}
                     </Row>
                 {/each}
             </Body>
+            <LinearProgress
+                indeterminate
+                bind:closed={loaded}/>
         </DataTable>
     {/if}
     </Content>
@@ -45,6 +48,7 @@ import type Movie from 'src/types/movie'
 
 import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 import Card, { Content, Actions, } from '@smui/card'
+import LinearProgress from '@smui/linear-progress';
 
 import { onMount } from 'svelte'
 import NewMovieDialog from '$lib/movies/NewMovieDialog.svelte';
@@ -52,6 +56,7 @@ import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 
 let movies: [Movie] | [] = []
+let loaded = false
 
 onMount( () => {
     getMovie()
@@ -59,12 +64,21 @@ onMount( () => {
 
 const getMovie = async () => {
 
-    const url = `${PUBLIC_CRUD_API_URL}/movies/`
+    try {
+        const url = `${PUBLIC_CRUD_API_URL}/movies/`
 
-    const res = await fetch(url)
-    const data = await res.json()
+        const res = await fetch(url)
+        const data = await res.json()
 
-    movies = data.items
+        movies = data.items
+    } catch (error) {
+        alert('Failed to get movies')
+        console.error(error)
+    } finally {
+        loaded = true
+    }
+
+    
 }
 
 </script>

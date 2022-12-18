@@ -1,15 +1,4 @@
-<Drawer variant="dismissible" bind:open>
-  <Content>
-    <List>
-      {#each links as link}
-        <Item href={link.href}>
-        <Graphic class="material-icons">{link.icon}</Graphic>
-        <Text>{link.text}</Text>
-      </Item>
-      {/each}
-    </List>
-  </Content>
-</Drawer>
+<NavDrawer bind:open={open}/>
 
 <AppContent> 
   <TopAppBar bind:this={topAppBar} variant="fixed">
@@ -31,10 +20,10 @@
 
 <script lang="ts">
     
+import NavDrawer from '$lib/NavDrawer.svelte';
 
 import IconButton from '@smui/icon-button';
-import Drawer, { AppContent, Content } from '@smui/drawer';
-import List, { Item, Text, Graphic} from '@smui/list';
+import { AppContent } from '@smui/drawer';
 import TopAppBar, {
     Row,
     Section,
@@ -44,13 +33,6 @@ import TopAppBar, {
 
 let topAppBar: TopAppBar;
 let open = false
-
-const links = [
-  { text: 'Home', href: '/', icon: 'home'},
-  { text: 'Movies', href: '/movies', icon: 'movie'},
-  { text: 'Persons', href: '/persons', icon: 'person'},
-  { text: 'About', href: '/about', icon: 'help'},
-]
 
 </script>
 
