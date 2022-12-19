@@ -19,7 +19,8 @@
 
 
 <script lang="ts">
-    
+// export const prerender = true;
+
 import NavDrawer from '$lib/NavDrawer.svelte';
 
 import IconButton from '@smui/icon-button';
