@@ -6,7 +6,7 @@
             <Textfield bind:value={newMovie.title} label="Title" />
         </Content>
         <Actions>
-            <!-- BUG: This button submits the form -->
+            <!-- Using type reset to prevent form submission-->
             <Button on:click={() => (open = false)} type="reset">
                 <Label>Cancel</Label>
             </Button>

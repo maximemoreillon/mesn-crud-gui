@@ -7,6 +7,8 @@
     <h2>{person.name}</h2>
 </EditableContentDialog>
 
+<Textfield bind:value={person.age} label="Age" input$emptyValueUndefined/>
+
 <h5>Directed</h5>
 <RelatedMovies query="director"/>
 
@@ -30,6 +32,7 @@
 <script lang="ts">
 import Button, { Label, Icon } from '@smui/button';
 import LinearProgress from '@smui/linear-progress';
+import Textfield from '@smui/textfield';
 
 import type Person from 'src/types/person';
 
