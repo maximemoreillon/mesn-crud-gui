@@ -5,12 +5,10 @@
     {:else if movie}
         <Content>
             <EditableContentDialog bind:content={movie.title} label="Title">
-                <h2 style="margin: 0;">{movie.title || 'Untitled movie'}</h2>
+                <h2>{movie.title || 'Untitled movie'}</h2>
             </EditableContentDialog>
 
-            <EditableContentDialog bind:content={movie.year} label="Year">
-                <div class="mdc-typography--subtitle1" style="color: #888;">{movie.year}</div>
-            </EditableContentDialog>
+            <Textfield bind:value={movie.year} label="Year" input$emptyValueUndefined/>
             
             <p>
                 Directed by
@@ -63,6 +61,7 @@ import Button, { Label, Icon } from '@smui/button';
 import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import LinearProgress from '@smui/linear-progress';
 import IconButton from '@smui/icon-button';
+import Textfield from '@smui/textfield';
 
 
 import { page } from '$app/stores';

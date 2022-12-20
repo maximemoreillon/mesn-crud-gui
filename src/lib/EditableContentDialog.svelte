@@ -3,9 +3,7 @@
     <Title>Edit {label}</Title>
     <form on:submit={saveContent}>
         <Content>
-            {#if contentLocal}
-                <Textfield bind:value={contentLocal} />
-            {/if}
+            <Textfield bind:value={contentLocal} input$emptyValueUndefined/>
         </Content>
         <Actions>
             <Button on:click={() => (open = false)}>
