@@ -9,7 +9,7 @@
             </EditableContentDialog>
 
             <Textfield bind:value={movie.year} label="Year" input$emptyValueUndefined/>
-            
+           
             <p>
                 Directed by
                 {#if movie.director}

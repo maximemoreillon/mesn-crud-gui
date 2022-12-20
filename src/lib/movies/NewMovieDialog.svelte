@@ -1,18 +1,13 @@
 <Dialog
   bind:open>
-  <Title>New movie</Title>
-  <form on:submit={createMovie}>
-    <Content id="simple-content">
-        <LayoutGrid>
-            <Cell>
-                <Textfield bind:value={newMovie.title} label="Title" />
-            </Cell>
-        </LayoutGrid>
-
+    <Title>New movie</Title>
+    <form on:submit={createMovie}>
+        <Content id="simple-content">
+            <Textfield bind:value={newMovie.title} label="Title" />
         </Content>
         <Actions>
             <!-- BUG: This button submits the form -->
-            <Button on:click={() => (open = false)}>
+            <Button on:click={() => (open = false)} type="reset">
                 <Label>Cancel</Label>
             </Button>
             <Button type="submit">

@@ -11,7 +11,7 @@
 
     </Content>
     <Actions>
-        <Button on:click={() => (open = false)}>
+        <Button on:click={() => (open = false)} type="reset">
             <Label>Cancel</Label>
         </Button>
         <Button type="submit">
