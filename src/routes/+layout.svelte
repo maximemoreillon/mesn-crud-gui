@@ -36,9 +36,3 @@ let topAppBar: TopAppBar;
 let open = true
 
 </script>
-
-<style>
-main {
-  padding: 1em;
-}
-</style>

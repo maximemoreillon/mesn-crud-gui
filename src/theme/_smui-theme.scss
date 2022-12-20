@@ -18,8 +18,8 @@
 
 html,
 body {
-  // background-color: theme.$surface;
-  background-color: #eeeeee;
+  background-color: theme.$surface;
+  // background-color: #eeeeee;
   color: theme.$on-surface;
   margin: 0;
   padding: 0;
@@ -84,13 +84,6 @@ strong {
   font-weight: bold;
 }
 
-
-// Custom helper classes
-
-.toolbar {
-  display: flex;
-}
-
-.spacer {
-  flex-grow: 1;
+main {
+  padding: 1em;
 }

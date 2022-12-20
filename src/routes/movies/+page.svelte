@@ -1,53 +1,47 @@
-<Card>
-    <Content>
-        <h2>Movies</h2>
-        <DataTable style="width: 100%;">
-            <Head>
+
+<h2>Movies</h2>
+<NewMovieDialog />
+<DataTable style="width: 100%;">
+    <Head>
+        <Row>
+            <Cell>Title</Cell>
+            <Cell>Year</Cell>
+            <Cell>Director</Cell>
+        </Row>
+    </Head>
+    {#if movies}
+        <Body>
+            {#each movies as movie}
                 <Row>
-                    <Cell>Title</Cell>
-                    <Cell>Year</Cell>
-                    <Cell>Director</Cell>
+                    <Cell>
+                        <a href={`/movies/${movie._id}`}>{movie.title || 'Untitled movie'}</a>
+                    </Cell>
+                    <Cell>{movie.year}</Cell>
+                    <Cell>
+                        {#if movie.director}
+                            <a href={`/persons/${movie.director._id}`}>
+                                {movie.director.name}
+                            </a>
+                        {:else}
+                            Undefined
+                        {/if}
+                    </Cell>
                 </Row>
-            </Head>
-            {#if movies}
-                <Body>
-                    {#each movies as movie}
-                        <Row>
-                            <Cell>
-                                <a href={`/movies/${movie._id}`}>{movie.title || 'Untitled movie'}</a>
-                            </Cell>
-                            <Cell>{movie.year}</Cell>
-                            <Cell>
-                                {#if movie.director}
-                                    <a href={`/persons/${movie.director._id}`}>
-                                        {movie.director.name}
-                                    </a>
-                                {:else}
-                                    Undefined
-                                {/if}
-                            </Cell>
-                        </Row>
-                    {/each}
-                </Body>
-            {/if}
-            <LinearProgress
-                indeterminate
-                bind:closed={loaded}/>
-        </DataTable>
-    </Content>
-    <Actions>
-        <ActionButtons>
-            <NewMovieDialog />
-        </ActionButtons>
-    </Actions>
-</Card>
+            {/each}
+        </Body>
+    {/if}
+    <LinearProgress
+        indeterminate
+        bind:closed={loaded}/>
+</DataTable>
+
+
 
 
 <script lang="ts">
 import type Movie from 'src/types/movie'
 
 import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
-import Card, { Content, Actions, ActionButtons, } from '@smui/card'
 import LinearProgress from '@smui/linear-progress';
 
 import NewMovieDialog from '$lib/movies/NewMovieDialog.svelte';

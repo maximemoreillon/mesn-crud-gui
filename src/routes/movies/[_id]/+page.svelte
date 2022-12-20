@@ -1,52 +1,41 @@
-<Card>
 
-    {#if loading}
-        <LinearProgress indeterminate/>
-    {:else if movie}
-        <Content>
-            <EditableContentDialog bind:content={movie.title} label="Title">
-                <h2>{movie.title || 'Untitled movie'}</h2>
-            </EditableContentDialog>
+{#if loading}
+<LinearProgress indeterminate/>
+{:else if movie}
+<EditableContentDialog bind:content={movie.title} label="Title">
+    <h2>{movie.title || 'Untitled movie'}</h2>
+</EditableContentDialog>
 
-            <Textfield bind:value={movie.year} label="Year" input$emptyValueUndefined/>
-           
-            <p>
-                Directed by
-                {#if movie.director}
-                    <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
-                {:else}
-                    <span>Unknown director</span>
-                {/if}
-                <EditMovieDirector on:selection={directorSelectedHandler}/>
-            </p>
+<Textfield bind:value={movie.year} label="Year" input$emptyValueUndefined/>
 
-            <h5>Actors</h5>
-            <AddActorDialog on:selection={actorAddHandler} />
-            <Actors actors={movie.actors} />
-                
-        </Content>
-
-        <Actions>
-            <ActionButtons>
-                <Button type="submit" on:click={deleteMovie}>
-                    <Icon class="material-icons">delete</Icon>
-                    <Label>Delete movie</Label>
-                </Button>
-                <Button type="submit" on:click={saveMovie}>
-                    <Icon class="material-icons">save</Icon>
-                    <Label>Save movie</Label>
-                </Button>
-            </ActionButtons>
-        </Actions>
-        
+<p>
+    Directed by
+    {#if movie.director}
+        <a href={`/persons/${movie.director._id}`}>{movie.director.name}</a>
     {:else}
-
-    <Content>
-        No data
-    </Content>
-    
+        <span>Unknown director</span>
     {/if}
-</Card>
+    <EditMovieDirector on:selection={directorSelectedHandler}/>
+</p>
+
+<h5>Actors</h5>
+<AddActorDialog on:selection={actorAddHandler} />
+<Actors actors={movie.actors} />
+    
+
+<Button type="submit" on:click={deleteMovie}>
+    <Icon class="material-icons">delete</Icon>
+    <Label>Delete movie</Label>
+</Button>
+<Button type="submit" on:click={saveMovie}>
+    <Icon class="material-icons">save</Icon>
+    <Label>Save movie</Label>
+</Button>
+
+    
+{:else}
+<div>No data</div>
+{/if}
 
 <script lang="ts">
 import type Movie from 'src/types/movie';
@@ -58,9 +47,7 @@ import Actors from '$lib/movies/[_id]/Actors.svelte';
 import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
-import Card, { Content, Actions, ActionButtons } from '@smui/card';
 import LinearProgress from '@smui/linear-progress';
-import IconButton from '@smui/icon-button';
 import Textfield from '@smui/textfield';
 
 

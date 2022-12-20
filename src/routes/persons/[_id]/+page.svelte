@@ -1,53 +1,35 @@
-<Card >
-    
-    {#if loading}
-        <Content>
-            <LinearProgress indeterminate/>
-        </Content>
-    {:else if person}
-        <Content>
 
-            <EditableContentDialog bind:content={person.name} label="Name">
-                <h2>{person.name}</h2>
-            </EditableContentDialog>
+{#if loading}
+<LinearProgress indeterminate/>
+{:else if person}
 
-            <h5>Directed</h5>
-            <RelatedMovies query="director"/>
+<EditableContentDialog bind:content={person.name} label="Name">
+    <h2>{person.name}</h2>
+</EditableContentDialog>
 
-            <h5>Starred in</h5>
-            <RelatedMovies query="actors"/>
-        </Content>
-        <Actions>
-            <ActionButtons>
-                <Button type="submit" on:click={deletePerson}>
-                    <Icon class="material-icons">delete</Icon>
-                    <Label>Delete person</Label>
-                </Button>
-                <Button type="submit" on:click={savePerson}>
-                    <Icon class="material-icons">save</Icon>
-                    <Label>Save person</Label>
-                </Button>
-            </ActionButtons>
-        </Actions>
-    {:else}
-        <Content>
-            No data
-        </Content>
-    {/if}
+<h5>Directed</h5>
+<RelatedMovies query="director"/>
 
-    
-</Card>
+<h5>Starred in</h5>
+<RelatedMovies query="actors"/>
+
+<Button type="submit" on:click={deletePerson}>
+    <Icon class="material-icons">delete</Icon>
+    <Label>Delete person</Label>
+</Button>
+<Button type="submit" on:click={savePerson}>
+    <Icon class="material-icons">save</Icon>
+    <Label>Save person</Label>
+</Button>
+
+{:else}
+<div>No data</div>
+{/if}
+
 
 <script lang="ts">
 import Button, { Label, Icon } from '@smui/button';
-import Card, { 
-    Content, 
-    Actions, 
-	ActionIcons,
-	ActionButtons,
-} from '@smui/card';
 import LinearProgress from '@smui/linear-progress';
-import IconButton from '@smui/icon-button';
 
 import type Person from 'src/types/person';
 
