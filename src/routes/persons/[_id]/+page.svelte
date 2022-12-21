@@ -28,11 +28,19 @@
 <div>No data</div>
 {/if}
 
+<Snackbar bind:this={snackbar}>
+  <SnackbarLabel>{snackbarLabel}</SnackbarLabel>
+  <Actions>
+    <IconButton class="material-icons" title="Dismiss">close</IconButton>
+  </Actions>
+</Snackbar>
 
 <script lang="ts">
 import Button, { Label, Icon } from '@smui/button';
 import LinearProgress from '@smui/linear-progress';
 import Textfield from '@smui/textfield';
+import Snackbar, { Actions, Label as SnackbarLabel } from '@smui/snackbar';
+import IconButton from '@smui/icon-button';
 
 import type Person from 'src/types/person';
 
@@ -42,12 +50,12 @@ import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
-
 import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let person: Person
-
 let loading = false
+let snackbar: Snackbar
+let snackbarLabel = ''
 
 onMount( async () => {
     await getPerson()
@@ -63,7 +71,8 @@ const getPerson = async () => {
         const res = await fetch(url)
         person = await res.json()
     } catch (error) {
-        alert('Failed to get person')
+        snackbar.open()
+        snackbarLabel = 'Query failed'
         console.error(error)
     } finally {
         loading = false
@@ -79,7 +88,8 @@ const deletePerson = async () => {
         await fetch(url, options)
         goto(`/persons`)
     } catch (error) {
-        alert('Deletion failed')
+        snackbar.open()
+        snackbarLabel = 'Deletion failed'
     }
 
 }
@@ -95,9 +105,12 @@ const savePerson = async () => {
     }
     try {
         await fetch(url, options)
-        alert('Person updated successfully')
+        snackbar.open()
+        snackbarLabel = 'Update successful'
     } catch (error) {
-        alert('Update failed')
+        console.error(error)
+        snackbar.open()
+        snackbarLabel = 'Update failed'
     }
 }
 

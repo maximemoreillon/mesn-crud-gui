@@ -37,6 +37,13 @@
 <div>No data</div>
 {/if}
 
+<Snackbar bind:this={snackbar}>
+  <SnackbarLabel>{snackbarLabel}</SnackbarLabel>
+  <Actions>
+    <IconButton class="material-icons" title="Dismiss">close</IconButton>
+  </Actions>
+</Snackbar>
+
 <script lang="ts">
 import type Movie from 'src/types/movie';
 import type Person from 'src/types/person';
@@ -47,8 +54,10 @@ import Actors from '$lib/movies/[_id]/Actors.svelte';
 import EditableContentDialog from '$lib/EditableContentDialog.svelte';
 
 import Button, { Label, Icon } from '@smui/button';
+import Snackbar, { Actions, Label as SnackbarLabel } from '@smui/snackbar';
 import LinearProgress from '@smui/linear-progress';
 import Textfield from '@smui/textfield';
+import IconButton from '@smui/icon-button';
 
 
 import { page } from '$app/stores';
@@ -59,6 +68,8 @@ import { PUBLIC_CRUD_API_URL } from '$env/static/public'
 
 let movie: Movie
 let loading = false
+let snackbar: Snackbar
+let snackbarLabel = ''
 
 onMount( () => {
     getMovie()
@@ -74,7 +85,8 @@ const getMovie = async () => {
         const res = await fetch(url)
         movie = await res.json()
     } catch (error) {
-        alert('Failed to get movie')
+        snackbar.open()
+        snackbarLabel = 'Query failed'
         console.error(error)
     } finally {
         loading = false
@@ -90,7 +102,8 @@ const deleteMovie = async () => {
         await fetch(url, options)
         goto(`/movies`)
     } catch (error) {
-        alert('Deletion failed')
+        snackbar.open()
+        snackbarLabel = 'Deletion failed'
     }
 
 }
@@ -106,9 +119,12 @@ const saveMovie = async () => {
     }
     try {
         await fetch(url, options)
-        alert('Movie updated successfully')
+        snackbar.open()
+        snackbarLabel = 'Update successful'
     } catch (error) {
-        alert('Update failed')
+        console.error(error)
+        snackbar.open()
+        snackbarLabel = 'Update failed'
     }
 }
 
