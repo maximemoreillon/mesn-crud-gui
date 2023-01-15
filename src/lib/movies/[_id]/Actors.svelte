@@ -1,39 +1,28 @@
-{#if actors}
-<List>
-    {#each actors as actor}
-        <Item>
-            <Text>
-                <a href={`/persons/${actor._id}`}>{actor.name}</a>
-            </Text>
-            <Meta class="material-icons" on:click={() => removeActor(actor)}>
-                delete
-            </Meta>
-        </Item>
-    {/each}
-</List>
-{/if}
-
 <script lang="ts">
+	import type Person from '$lib/person';
 
-import type Person from 'src/types/person';
+	import List, { Item, Text, Meta } from '@smui/list';
 
-import List, {
-    Item,
-    Text,
-    Meta
-} from '@smui/list';
+	export let actors: Person[];
 
-export let actors: Person[]
-
-
-const removeActor = (actor: Person) => {
-    const actorIndex = actors.findIndex( ({_id}) => _id === actor._id)
-    if(actorIndex >= 0) {
-        actors.splice(actorIndex, 1)
-        actors = actors
-    }
-}
-
-
-
+	const removeActor = (actor: Person) => {
+		const actorIndex = actors.findIndex(({ _id }) => _id === actor._id);
+		if (actorIndex >= 0) {
+			actors.splice(actorIndex, 1);
+			actors = actors;
+		}
+	};
 </script>
+
+{#if actors}
+	<List>
+		{#each actors as actor}
+			<Item>
+				<Text>
+					<a href={`/persons/${actor._id}`}>{actor.name}</a>
+				</Text>
+				<Meta class="material-icons" on:click={() => removeActor(actor)}>delete</Meta>
+			</Item>
+		{/each}
+	</List>
+{/if}
